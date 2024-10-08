@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 
-const AddDish = ({ navigation, addDish }) => { // Change here
+const AddDish = ({ navigation, addDish }) => {
   const [dishName, setDishName] = useState('');
   const [description, setDescription] = useState('');
   const [course, setCourse] = useState('');

@@ -1,4 +1,3 @@
-// HomeScreen.js
 import React from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
@@ -23,7 +22,7 @@ const HomeScreen = ({ navigation, menuItems, addDish, removeDish }) => {
 
       <FlatList
         data={menuItems}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()} // Use unique ID
         renderItem={({ item }) => (
           <View style={styles.menuItem}>
             <Text style={styles.dishName}>{item.dishName} - R{item.price}</Text>

@@ -16,8 +16,16 @@ import Menu from './Menu';
 
 const Stack = createStackNavigator();
 
+// Predefined menu items
+const initialMenuItems = [
+  { id: 1, dishName: 'Burger', description: 'Delicious beef burger', course: 'Mains', price: 50 },
+  { id: 2, dishName: 'Caesar Salad', description: 'Fresh salad with Caesar dressing', course: 'Starters', price: 30 },
+  { id: 3, dishName: 'Chocolate Cake', description: 'Rich chocolate cake', course: 'Desserts', price: 25 },
+];
+
 export default function App() {
-  const [menuItems, setMenuItems] = useState([]);
+  // Use initialMenuItems to initialize menuItems state
+  const [menuItems, setMenuItems] = useState(initialMenuItems);
 
   const addDish = (newDish) => {
     const dishWithId = { ...newDish, id: menuItems.length > 0 ? menuItems[menuItems.length - 1].id + 1 : 1 };
