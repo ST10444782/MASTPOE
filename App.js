@@ -11,12 +11,11 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
-import AddDish from './AddDish';
-import Menu from './Menu';
+import ChefScreen from './ChefScreen';
+import FilterScreen from './FilterScreen';
 
 const Stack = createStackNavigator();
 
-// Predefined menu items
 const initialMenuItems = [
   { id: 1, dishName: 'Burger', description: 'Delicious beef burger', course: 'Mains', price: 50 },
   { id: 2, dishName: 'Caesar Salad', description: 'Fresh salad with Caesar dressing', course: 'Starters', price: 30 },
@@ -24,7 +23,6 @@ const initialMenuItems = [
 ];
 
 export default function App() {
-  // Use initialMenuItems to initialize menuItems state
   const [menuItems, setMenuItems] = useState(initialMenuItems);
 
   const addDish = (newDish) => {
@@ -44,22 +42,21 @@ export default function App() {
             <HomeScreen 
               {...props} 
               menuItems={menuItems} 
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Chef">
+          {(props) => (
+            <ChefScreen 
+              {...props} 
+              menuItems={menuItems} 
               addDish={addDish} 
               removeDish={removeDish} 
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="AddDish">
-          {(props) => (
-            <AddDish 
-              {...props} 
-              addDish={addDish} 
-              route={{ ...props.route, params: { addDish } }} // Pass addDish in route.params
-            />
-          )}
-        </Stack.Screen>
-        <Stack.Screen name="Menu">
-          {(props) => <Menu {...props} menuItems={menuItems} />}
+        <Stack.Screen name="Filter">
+          {(props) => <FilterScreen {...props} menuItems={menuItems} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

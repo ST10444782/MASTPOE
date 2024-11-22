@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
 
-const HomeScreen = ({ navigation, menuItems, addDish, removeDish }) => {
+const HomeScreen = ({ navigation, menuItems }) => {
   const getTotalItems = () => menuItems?.length || 0;
 
   const getAveragePrice = (course) => {
@@ -22,23 +22,23 @@ const HomeScreen = ({ navigation, menuItems, addDish, removeDish }) => {
 
       <FlatList
         data={menuItems}
-        keyExtractor={(item) => item.id.toString()} // Use unique ID
+        keyExtractor={(item) => item.id.toString()} // Unique ID
         renderItem={({ item }) => (
-          <View style={styles.menuItem}>
-            <Text style={styles.dishName}>{item.dishName} - R{item.price}</Text>
-            <Button title="Remove" onPress={() => removeDish(item)} color="#FF6F61" />
-          </View>
+          <Text style={styles.menuItem}>
+            {item.dishName} - {item.course} - R{item.price}
+          </Text>
         )}
+        ListEmptyComponent={<Text style={styles.empty}>No menu items available.</Text>}
       />
 
       <Button
-        title="Add a new Dish"
-        onPress={() => navigation.navigate('AddDish')}
+        title="Manage Menu (Chef)"
+        onPress={() => navigation.navigate('Chef')}
         color="#FF6F61"
       />
       <Button
-        title="View Menu"
-        onPress={() => navigation.navigate('Menu')}
+        title="Filter Menu by Course"
+        onPress={() => navigation.navigate('Filter')}
         color="#FF6F61"
       />
     </View>
@@ -63,14 +63,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   menuItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  dishName: {
     fontSize: 16,
     color: 'white',
+    marginBottom: 10,
+  },
+  empty: {
+    fontSize: 16,
+    color: 'gray',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 
